@@ -1,0 +1,45 @@
+@startuml
+actor "Пользователь ПК" as user
+
+== Система управления композициями ==
+box "Система управления композициями" #Application
+participant "Поиск композиций" as searchComp
+participant "Проигрыватель" as player
+
+user -> searchComp: Найти песню
+searchComp -> player: Выбрать композицию
+player --> user: Проиграть композицию
+end box
+
+== Система управления плейлистами ==
+box "Система управления плейлистами" #Technology
+participant "Поиск плейлистов" as searchPl
+participant "Управление плейлистами" as managePl
+
+user -> searchPl: Найти плейлист
+searchPl -> managePl: Выбрать плейлист
+
+user -> managePl: Прослушать плейлист
+managePl --> player: Проигрывать композиции из плейлиста
+player --> user: Проиграть плейлист
+
+user -> managePl: Создать плейлист
+
+user -> searchPl: Найти плейлист
+searchPl -> managePl: Выбрать плейлист
+user -> managePl: Изменить плейлист
+
+end box
+
+== Система управления плагинами ==
+box "Система управления плагинами" #Business
+participant "Поиск плагинов" as searchPlugin
+participant "Управление плагинами" as managePlugin
+
+searchPlugin -> managePlugin: Выбрать плагин
+user -> managePlugin: Загрузить плагин
+user -> searchPlugin: Найти плагин
+searchPlugin -> managePlugin: Выбрать плагин
+user -> managePlugin: Удалить плагин
+end box
+@enduml
